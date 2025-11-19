@@ -1,46 +1,40 @@
 #' @export
 vec_ptype_abbr.adj <- function(x, ...) {
-  'adj'
+    "adj"
 }
 
 #' @export
 vec_ptype_full.adj <- function(x, ...) {
-  'adj'
+    "adj"
 }
 
 #' @export
 format.adj <- function(x, ...) {
-  if (length(x) == 0) {
-    return(invisible(NULL))
-  }
-
-  paste0('adj', adj_preview(x))
+    if (length(x) == 0) {
+        return(invisible(NULL))
+    }
+    vapply(x, adj_preview, character(1))
 }
 
 adj_size <- function(x) {
-  lengths(x)
+    lengths(x)
 }
 
 adj_preview <- function(x) {
-  vapply(x, function(y) {
-    n <- length(y)
+    n <- length(x)
     ifelse(
-      n == 0,
-      '[ ]',
-      ifelse(
         n <= 3,
-        paste0('[', paste(y, collapse = ','), ']'),
-        paste0(
-          '[',
-          paste(head(y, 2), collapse = ','),
-          ',...]'
-        )
-      )
+        paste0("{", paste0(x, collapse = ", "), "}"),
+        paste0("{", paste0(x[1:3], collapse = ", "), ", \u2026}")
     )
-  }, character(1))
 }
+
 
 #' @export
 obj_print_data.adj <- function(x, ...) {
-  cat(format(x), sep = "\n")
+    if (length(x) == 0) {
+        return(invisible(x))
+    }
+    out <- stats::setNames(format(x), names(x))
+    print(out, quote = FALSE)
 }

@@ -7,23 +7,65 @@
 \alias{is_adj}
 \title{Create an adjacency list}
 \usage{
-adj(...)
+adj(
+  ...,
+  ids = NULL,
+  duplicates = c("warn", "error", "allow", "remove"),
+  self_loops = c("warn", "error", "allow", "remove")
+)
 
-validate_adj(x)
+validate_adj(
+  x,
+  duplicates = c("warn", "error", "allow", "remove"),
+  self_loops = c("warn", "error", "allow", "remove")
+)
 
 as_adj(x)
 
 is_adj(x)
 }
 \arguments{
-\item{...}{Integer vectors or a single list of integer vectors.}
+\item{...}{Vectors or a single list of vectors. Vectors should be comprised
+either of (1-indexed) indices of adjacent nodes, or of unique identifiers,
+which must match to the provided \code{ids}.
+\code{NULL} can be used in place of a length-zero vector for nodes without
+neighbors.}
+
+\item{ids}{A vector of unique node identifiers. Each provided vector in \code{...}
+will be matched to these identifiers. If \code{NULL}, the identifiers are taken
+to be 1-indexed integers.}
+
+\item{duplicates}{Controls handling of duplicate neighbors. The default
+\code{"warn"} warns the user; \code{"error"} throws an error; \code{"allow"} allows
+duplicates, and \code{"remove"} removes duplicates silently.}
+
+\item{self_loops}{Controls handling of self-loops (nodes that are adjacent
+to themselves). The default \code{"warn"} warns the user; \code{"error"} throws an
+error; \code{"allow"} allows self-loops, and \code{"remove"} removes self-loops silently.}
+
+\item{x}{An adjacency list}
 }
 \value{
 An \code{adj} list
 }
 \description{
-Create an adjacency list
+Create an adjacency list from a list of vectors of adjacent node identifiers.
+}
+\details{
+\subsection{Equality}{
+
+Equality for \code{adj} lists is evaluated elementwise. Two sets of neighbors are
+considered equal if they contain the same neighbors, regardless of order.
+}
 }
 \examples{
-adj(1:3, NULL, 4:5)
+a1 = adj(list(c(2, 3), c(1, 3), c(1, 2)))
+a2 = adj(list(c(3, 2), c(3, 1), c(2, 1)))
+a1 == a2
+
+adj(2:3, NULL, 4:5, integer(0), 1)
+adj(1, 2, 3, self_loops = "remove")
+
+adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
+adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "remove")
 }

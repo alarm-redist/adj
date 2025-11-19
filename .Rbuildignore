@@ -1,3 +1,6 @@
 ^adj\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^data-raw$
+^air\.toml$
+^\.vscode$

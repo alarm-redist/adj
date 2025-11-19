@@ -1,17 +1,25 @@
 Package: adj
 Title: Lightweight Adjacency Lists
 Version: 0.0.0.9000
-Authors@R: 
-    person("Christopher T.", "Kenny", , "christopherkenny@fas.harvard.edu", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-9386-6860"))
+Authors@R: c(
+    person("Christopher T.", "Kenny", , "ctkenny@proton.me", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-9386-6860")),
+    person("Cory", "McCartan", , "mccartan@psu.edu", role = "aut",
+           comment = c(ORCID = "0000-0002-6251-669X"))
+  )
 Description: Provides an S3 class to represent graph adjacency lists using 'vctrs'.
     Allows for creation, subsetting, combining, and pretty printing of these lists.
     This class can further be reindexed to allow for zero-indexed lists which
     allows for easy passing of objects to low-level languages for processing.
+Imports:
+    rlang,
+    cli,
+    vctrs (>= 0.6.5)
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-Imports: 
-    cli,
-    vctrs (>= 0.6.5)
+Depends:
+    R (>= 3.5)
+LazyData: true
+Suggests: tinytest
