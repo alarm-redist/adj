@@ -35,6 +35,6 @@ obj_print_data.adj <- function(x, ...) {
     if (length(x) == 0) {
         return(invisible(x))
     }
-    out <- stats::setNames(format(x), names(x))
+    out <- vec_set_names(format(x), names(x))
     print(out, quote = FALSE)
 }
