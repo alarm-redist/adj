@@ -20,3 +20,6 @@ expect_error(
 )
 a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "remove")
 expect_true(all(lengths(a) < 4))
+
+a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
+expect_identical(to_list(a, ids = konigsberg$area), konigsberg$bridge_to)

@@ -37,3 +37,16 @@ vec_cast.adj.list <- function(x, to, ...) {
 vec_cast.list.adj <- function(x, to, ...) {
     vec_data(x)
 }
+
+#' @rdname adj
+#' @export
+to_list <- function(x, ids = NULL) {
+    x = vec_cast(x, to = list())
+    if (!is.null(ids)) {
+        if (length(ids) != length(x)) {
+            cli::cli_abort("{.arg ids} must have the same length as {.arg x}.")
+        }
+        x <- lapply(x, function(nbors) ids[nbors])
+    }
+    x
+}
