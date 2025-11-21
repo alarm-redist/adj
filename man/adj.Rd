@@ -55,6 +55,14 @@ Create an adjacency list from a list of vectors of adjacent node identifiers.
 Equality for \code{adj} lists is evaluated elementwise. Two sets of neighbors are
 considered equal if they contain the same neighbors, regardless of order.
 }
+
+\subsection{Number of nodes and edjges}{
+
+The \code{adj} package is not focused on graph operations. The \code{length()} function
+will return the number of nodes. To compute the number of edges in an
+adjacency list \code{a}, use \code{sum(lengths(a))}, and divide by 2 for undirected
+graphs.
+}
 }
 \examples{
 a1 = adj(list(c(2, 3), c(1, 3), c(1, 2)))

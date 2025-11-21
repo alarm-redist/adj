@@ -6,6 +6,12 @@
 #' Equality for `adj` lists is evaluated elementwise. Two sets of neighbors are
 #' considered equal if they contain the same neighbors, regardless of order.
 #'
+#' ## Number of nodes and edjges
+#' The `adj` package is not focused on graph operations. The `length()` function
+#' will return the number of nodes. To compute the number of edges in an
+#' adjacency list `a`, use `sum(lengths(a))`, and divide by 2 for undirected
+#' graphs.
+#'
 #' @param ... Vectors or a single list of vectors. Vectors should be comprised
 #'   either of (1-indexed) indices of adjacent nodes, or of unique identifiers,
 #'   which must match to the provided `ids`.
@@ -79,7 +85,8 @@ adj <- function(
         })
     }
 
-    validate_adj(new_adj(x, duplicates, self_loops))
+    x = validate_adj(new_adj(x, duplicates, self_loops))
+    x
 }
 
 new_adj <- function(
