@@ -59,7 +59,7 @@ Equality for \code{adj} lists is evaluated elementwise. Two sets of neighbors ar
 considered equal if they contain the same neighbors, regardless of order.
 }
 
-\subsection{Number of nodes and edjges}{
+\subsection{Number of nodes and edges}{
 
 The \code{adj} package is not focused on graph operations. The \code{length()} function
 will return the number of nodes. To compute the number of edges in an

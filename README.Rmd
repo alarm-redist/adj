@@ -16,9 +16,12 @@ knitr::opts_chunk$set(
 # adj <img src="man/figures/logo.svg" align="right" height="144" />
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/christopherkenny/adj/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/christopherkenny/adj/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of adj is to ...
+`adj` provides a lightweight adjacency list class for R, built on the [vctrs](https://vctrs.r-lib.org/) package.
+This allows for pretty printing along with several validation checks.
+The adjacency lists are 0-indexed, to allow them to work nicely with [`redist`](https://alarm-redist.org/redist/).
 
 ## Installation
 
@@ -27,4 +30,30 @@ You can install the development version of adj from [GitHub](https://github.com/
 ``` r
 # install.packages("pak")
 pak::pak("christopherkenny/adj")
+```
+
+## Examples
+
+`adj` comes loaded with example data for the seven bridges of Königsberg.
+
+```{r}
+library(adj)
+data("konigsberg")
+
+konigsberg
+```
+
+We can build an adjacency graph using the unique identifiers of each area.
+
+```{r}
+adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
+```
+
+Alternatively, we can create an adjacency list from a list of integers.
+Here, we set `duplicates = "remove"` to remove any duplicate edges.
+
+```{r}
+adj_int <- lapply(konigsberg$bridge_to, function(x) match(x, LETTERS))
+
+adj(adj_int, duplicates = "remove")
 ```
