@@ -14,11 +14,7 @@ adj(
   self_loops = c("warn", "error", "allow", "remove")
 )
 
-validate_adj(
-  x,
-  duplicates = c("warn", "error", "allow", "remove"),
-  self_loops = c("warn", "error", "allow", "remove")
-)
+validate_adj(x)
 
 as_adj(x)
 
@@ -37,11 +33,13 @@ to be 1-indexed integers.}
 
 \item{duplicates}{Controls handling of duplicate neighbors. The default
 \code{"warn"} warns the user; \code{"error"} throws an error; \code{"allow"} allows
-duplicates, and \code{"remove"} removes duplicates silently.}
+duplicates, and \code{"remove"} removes duplicates silently and then sets the
+corresponding attribute to \code{"error"}.}
 
 \item{self_loops}{Controls handling of self-loops (nodes that are adjacent
 to themselves). The default \code{"warn"} warns the user; \code{"error"} throws an
-error; \code{"allow"} allows self-loops, and \code{"remove"} removes self-loops silently.}
+error; \code{"allow"} allows self-loops, and \code{"remove"} removes self-loops
+silently and then sets the corresponding attribute to \code{"error"}.}
 
 \item{x}{An adjacency list}
 }

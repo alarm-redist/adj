@@ -16,10 +16,12 @@
 #'   to be 1-indexed integers.
 #' @param duplicates Controls handling of duplicate neighbors. The default
 #'   `"warn"` warns the user; `"error"` throws an error; `"allow"` allows
-#'   duplicates, and `"remove"` removes duplicates silently.
+#'   duplicates, and `"remove"` removes duplicates silently and then sets the
+#'   corresponding attribute to `"error"`.
 #' @param self_loops Controls handling of self-loops (nodes that are adjacent
 #'   to themselves). The default `"warn"` warns the user; `"error"` throws an
-#'   error; `"allow"` allows self-loops, and `"remove"` removes self-loops silently.
+#'   error; `"allow"` allows self-loops, and `"remove"` removes self-loops
+#'   silently and then sets the corresponding attribute to `"error"`.
 #'
 #' @returns An `adj` list
 #'
@@ -40,41 +42,19 @@ adj <- function(
     duplicates = c("warn", "error", "allow", "remove"),
     self_loops = c("warn", "error", "allow", "remove")
 ) {
-    duplicates = rlang::arg_match(duplicates)
     x <- rlang::list2(...)
     if (length(x) == 1 && is.list(x[[1]])) {
         x <- x[[1]]
     }
+
+    # match IDs
     if (!is.null(ids)) {
         x <- lapply(x, match, table = ids)
     }
-    x <- validate_adj(x, duplicates = duplicates, self_loops = self_loops)
-    new_adj(x)
-}
-
-new_adj <- function(x = list()) {
-    new_list_of(x, ptype = integer(), class = "adj")
-}
-
-#' @param x An adjacency list
-#' @export
-#' @rdname adj
-validate_adj <- function(
-    x,
-    duplicates = c("warn", "error", "allow", "remove"),
-    self_loops = c("warn", "error", "allow", "remove")
-) {
-    if (!is.list(x)) {
-        cli::cli_abort(c(
-            "{.arg x} must be a list.",
-            "x" = "You supplied an object of class {.cls {class(x)}}."
-        ))
-    }
-    x = as.list(x)
 
     # handle types
-    ints <- vapply(x, rlang::is_integerish, logical(1))
-    nulls <- vapply(x, is.null, logical(1))
+    ints <- vapply(x, rlang::is_integerish, FALSE)
+    nulls <- vapply(x, is.null, FALSE)
     if (!all(ints | nulls)) {
         cli::cli_abort(c(
             "{.arg x} must be a list of integer vectors or NULL.",
@@ -84,8 +64,48 @@ validate_adj <- function(
     x[nulls] <- lapply(x[nulls], function(x) integer(0))
     x[ints] <- lapply(x[ints], as.integer)
 
+    # handle duplicates and self-loops
+    duplicates = rlang::arg_match(duplicates)
+    if (duplicates == "remove") {
+        duplicates = "error"
+        x = lapply(x, vec_unique)
+    }
+    self_loops = rlang::arg_match(self_loops)
+    if (self_loops == "remove") {
+        self_loops = "error"
+        x = lapply(seq_along(x), function(i) {
+            nbors = x[[i]]
+            nbors[nbors != i]
+        })
+    }
+
+    validate_adj(new_adj(x, duplicates, self_loops))
+}
+
+new_adj <- function(
+    x = list(),
+    duplicates = "warn",
+    self_loops = "warn"
+) {
+    new_list_of(
+        x,
+        ptype = integer(),
+        duplicates = duplicates,
+        self_loops = self_loops,
+        class = "adj"
+    )
+}
+
+#' @param x An adjacency list
+#' @export
+#' @rdname adj
+validate_adj <- function(x) {
+    if (!is.list(x)) {
+        cli::cli_abort("{.arg x} must be a list.")
+    }
+
     # check indices
-    all_idx = unlist(x[ints])
+    all_idx = unlist(vec_data(x))
     invalid = all_idx < 1 | all_idx > length(x) | is.na(all_idx)
     if (any(invalid)) {
         cli::cli_abort(c(
@@ -94,47 +114,44 @@ validate_adj <- function(
         ))
     }
 
-    # handle duplicates
-    dup_msg = c(
-        "Duplicate neighbors found in adjacency list.",
-        "i" = "Found duplicates at node {i}."
-    )
-    handle_dup = switch(
-        rlang::arg_match(duplicates),
-        "warn" = function(v, i) {
-            cli::cli_warn(dup_msg)
-            v
-        },
-        "error" = function(v, i) cli::cli_abort(dup_msg),
-        "allow" = function(v, i) v,
-        "remove" = function(v, i) vec_unique(v)
-    )
-    x = lapply(seq_along(x), function(i) {
-        nbors = x[[i]]
-        if (vec_duplicate_any(nbors)) handle_dup(nbors, i) else nbors
-    })
+    # handle duplicates and self-loops
+    mode_dups = attr(x, "duplicates")
+    if (mode_dups != "allow") {
+        dups = vapply(seq_along(x), function(i) vec_duplicate_any(x[[i]]), FALSE)
+        if (any(dups)) {
+            dup_msg = c(
+                "Duplicate neighbors found in adjacency list.",
+                "i" = "Found duplicate{?s} at node{?s} {as.character(which(dups))}."
+            )
+            if (mode_dups == "warn") {
+                cli::cli_warn(dup_msg)
+            } else if (mode_dups == "error") {
+                cli::cli_abort(dup_msg)
+            } else {
+                cli::cli_abort("{.arg duplicates} must be one of 'warn', 'error', or 'allow'.")
+            }
+        }
+    }
 
-    # handle self-loops
-    loop_msg = c(
-        "Self-loops found in adjacency list.",
-        "i" = "Found self-loop at node {i}."
-    )
-    handle_loop = switch(
-        rlang::arg_match(self_loops),
-        "warn" = function(v, i) {
-            cli::cli_warn(loop_msg)
-            v
-        },
-        "error" = function(v, i) cli::cli_abort(loop_msg),
-        "allow" = function(v, i) v,
-        "remove" = function(v, i) v[v != i]
-    )
-    x = lapply(seq_along(x), function(i) {
-        nbors = x[[i]]
-        if (i %in% nbors) handle_loop(nbors, i) else nbors
-    })
+    mode_loops = attr(x, "self_loops")
+    if (mode_loops != "allow") {
+        loops = vapply(seq_along(x), function(i) i %in% x[[i]], FALSE)
+        if (any(loops)) {
+            loop_msg = c(
+                "Self-loops found in adjacency list.",
+                "i" = "Found self-loop{?s} at node{?s} {as.character(which(loops))}."
+            )
+            if (mode_loops == "warn") {
+                cli::cli_warn(loop_msg)
+            } else if (mode_loops == "error") {
+                cli::cli_abort(loop_msg)
+            } else {
+                cli::cli_abort("{.arg self_loops} must be one of 'warn', 'error', or 'allow'.")
+            }
+        }
+    }
 
-    invisible(new_adj(x))
+    invisible(x)
 }
 
 #' @export
