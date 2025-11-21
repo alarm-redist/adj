@@ -10,9 +10,7 @@
 
 `adj` provides a lightweight adjacency list class for R, built on the
 [vctrs](https://vctrs.r-lib.org/) package. This allows for pretty
-printing along with several validation checks. The adjacency lists are
-0-indexed, to allow them to work nicely with
-[`redist`](https://alarm-redist.org/redist/).
+printing along with several validation checks.
 
 ## Installation
 

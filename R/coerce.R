@@ -1,4 +1,4 @@
-#' adj Coercion
+#' Coercing `adj` lists
 #'
 #' Coercion methods for [vctrs::vec_ptype2()]
 #'

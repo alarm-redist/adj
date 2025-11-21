@@ -1,3 +1,12 @@
 {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "[c]": {
+        "editor.formatOnSave": false,
+        "editor.autoIndent": "none"
+    },
+    "[cpp]": {
+        "editor.formatOnSave": false,
+        "editor.autoIndent": "none"
+    }
 }

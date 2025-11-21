@@ -9,8 +9,8 @@ Authors@R: c(
   )
 Description: Provides an S3 class to represent graph adjacency lists using 'vctrs'.
     Allows for creation, subsetting, combining, and pretty printing of these lists.
-    This class can further be reindexed to allow for zero-indexed lists which
-    allows for easy passing of objects to low-level languages for processing.
+    Adjacency lists can be easily converted to zero-indexed lists, which allows
+    for easy passing of objects to low-level languages for processing.
 Depends:
     R (>= 3.5)
 Imports:

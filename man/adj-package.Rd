@@ -5,7 +5,7 @@
 \alias{adj-package}
 \title{adj: Lightweight Adjacency Lists}
 \description{
-Provides an S3 class to represent graph adjacency lists using 'vctrs'. Allows for creation, subsetting, combining, and pretty printing of these lists. This class can further be reindexed to allow for zero-indexed lists which allows for easy passing of objects to low-level languages for processing.
+Provides an S3 class to represent graph adjacency lists using 'vctrs'. Allows for creation, subsetting, combining, and pretty printing of these lists. Adjacency lists can be easily converted to zero-indexed lists, which allows for easy passing of objects to low-level languages for processing.
 }
 \author{
 \strong{Maintainer}: Christopher T. Kenny \email{ctkenny@proton.me} (\href{https://orcid.org/0000-0002-9386-6860}{ORCID})

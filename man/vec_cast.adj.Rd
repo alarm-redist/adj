@@ -2,7 +2,7 @@
 % Please edit documentation in R/cast.R
 \name{vec_cast.adj}
 \alias{vec_cast.adj}
-\title{adj Casting}
+\title{Casting \code{adj} lists}
 \usage{
 \method{vec_cast}{adj}(x, to, ...)
 }

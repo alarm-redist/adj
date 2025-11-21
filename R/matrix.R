@@ -16,7 +16,7 @@
 #' mat = as.matrix(a)
 #' all(a == from_matrix(mat, duplicates = "allow")) # TRUE
 #' @export
-from_matrix <- function(
+adj_from_matrix <- function(
     x,
     duplicates = c("warn", "error", "allow", "remove"),
     self_loops = c("warn", "error", "allow", "remove")
@@ -42,7 +42,7 @@ from_matrix <- function(
     validate_adj(out)
 }
 
-#' @rdname from_matrix
+#' @rdname adj_from_matrix
 #' @export
 as.matrix.adj <- function(x, ...) {
     n = length(x)

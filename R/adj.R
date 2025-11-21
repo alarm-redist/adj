@@ -170,5 +170,5 @@ as_adj <- function(x) {
 #' @export
 #' @rdname adj
 is_adj <- function(x) {
-    vec_is(x, ptype = new_adj())
+    inherits(x, "adj")
 }

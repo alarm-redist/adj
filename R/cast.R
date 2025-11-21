@@ -1,4 +1,4 @@
-#' adj Casting
+#' Casting `adj` lists
 #'
 #' Dispatch methods for [vctrs::vec_cast()]
 #'
@@ -11,7 +11,7 @@
 #' @export
 #' @export vec_cast.adj
 vec_cast.adj <- function(x, to, ...) {
-    UseMethod('vec_cast.adj')
+    UseMethod("vec_cast.adj")
 }
 
 #' @method vec_cast.adj default

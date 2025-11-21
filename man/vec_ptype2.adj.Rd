@@ -2,7 +2,7 @@
 % Please edit documentation in R/coerce.R
 \name{vec_ptype2.adj}
 \alias{vec_ptype2.adj}
-\title{adj Coercion}
+\title{Coercing \code{adj} lists}
 \usage{
 \method{vec_ptype2}{adj}(x, y, ...)
 }
