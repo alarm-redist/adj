@@ -1,0 +1,12 @@
+[
+    {
+        "command": "clang -arch arm64 -std=gnu2x -I\"/Library/Frameworks/R.framework/Resources/include\" -DNDEBUG   -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c index.c -o index.o",
+        "file": "index.c",
+        "directory": "/Users/cmccartan/Documents/Work/Research/redistricting/adj/src"
+    },
+    {
+        "command": "clang -arch arm64 -std=gnu2x -I\"/Library/Frameworks/R.framework/Resources/include\" -DNDEBUG   -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c init.c -o init.o",
+        "file": "init.c",
+        "directory": "/Users/cmccartan/Documents/Work/Research/redistricting/adj/src"
+    }
+]

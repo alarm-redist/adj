@@ -28,3 +28,4 @@ RoxygenNote: 7.3.3
 LazyData: true
 Language: en-US
 Encoding: UTF-8
+Config/build/compilation-database: true

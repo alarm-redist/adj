@@ -6,3 +6,5 @@
 ^\.vscode$
 ^README\.Rmd$
 ^\.github$
+^compile_commands\.json$
+^\.cache$

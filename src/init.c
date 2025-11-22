@@ -7,10 +7,12 @@
 #include <R_ext/Visibility.h>
 
 /* .Call calls */
-extern SEXP zero_index_c(SEXP x);
+extern SEXP shift_index_c(SEXP x);
+extern SEXP reindex_c(SEXP x, SEXP i);
 
 static const R_CallMethodDef CallEntries[] = {
-    {"zero_index_c", (DL_FUNC) &zero_index_c, 1},
+    {"shift_index_c", (DL_FUNC) &shift_index_c, 2},
+    {"reindex_c", (DL_FUNC) &reindex_c, 2},
     {NULL, NULL, 0}
 };
 
