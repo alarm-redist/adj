@@ -69,8 +69,8 @@ SEXP factor_c(SEXP x, SEXP g, SEXP n_group, SEXP dups, SEXP loops) {
     }
     int n_g = Rf_asInteger(n_group);
     int* pg = INTEGER(g);
-    bool rem_dups = !Rf_asLogical(dups);
-    bool rem_loops = !Rf_asLogical(loops);
+    int rem_dups = !Rf_asLogical(dups); // bool
+    int rem_loops = !Rf_asLogical(loops); // bool
 
     // determine output sizes
     int* n_nbors_out = (int*) R_alloc(n_g, sizeof(int));
