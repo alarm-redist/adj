@@ -1,10 +1,8 @@
 #' @export
 `[.adj` <- function(x, i, ...) {
     i = vec_as_location(i, length(x), names = names(x), missing = "error", arg = "i")
-    if (anyDuplicated.default(i) > 0) {
-        cli::cli_abort("{.arg i} must not contain duplicate indices.")
-    }
-    vec_restore(.Call(reindex_c, x, i), x)
+    out = .Call(reindex_c, x, i)
+    vec_restore(out, x)
 }
 #' @export
 `[<-.adj` <- function(x, i, value) {

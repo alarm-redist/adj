@@ -18,6 +18,9 @@ SEXP reindex_c(SEXP x, SEXP i) {
     }
     for (int idx = 0; idx < n_out; idx++) {
         int i_idx = pi[idx] - 1;
+        if (lookup[i_idx] != 0) {
+            Rf_error("Duplicate indices in reindexing vector");
+        }
         lookup[i_idx] = idx + 1;
     }
 

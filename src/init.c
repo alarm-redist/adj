@@ -7,7 +7,7 @@
 #include <R_ext/Visibility.h>
 
 /* .Call calls */
-extern SEXP shift_index_c(SEXP x);
+extern SEXP shift_index_c(SEXP x, SEXP shift);
 extern SEXP reindex_c(SEXP x, SEXP i);
 
 static const R_CallMethodDef CallEntries[] = {
