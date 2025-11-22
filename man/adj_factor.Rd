@@ -24,7 +24,8 @@ adj_factor_int(
 \item{x}{An \code{adj} list}
 
 \item{groups}{A vector specifying the group membership for each node in \code{x}.
-\code{adj_factor()} will process this vector with \code{\link[vctrs:vec_group]{vctrs::vec_group_id()}}.}
+\code{adj_factor()} will process this vector with \code{\link[vctrs:vec_group]{vctrs::vec_group_id()}};
+\code{adj_factor_int()} expects an (1-indexed) integer vector.}
 
 \item{duplicates}{Controls handling of duplicate neighbors. The value
 \code{"warn"} warns the user; \code{"error"} throws an error; \code{"allow"} allows

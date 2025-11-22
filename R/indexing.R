@@ -42,7 +42,8 @@ c.adj <- function(...) {
 #'
 #' @param x An `adj` list
 #' @param groups A vector specifying the group membership for each node in `x`.
-#'   `adj_factor()` will process this vector with [vctrs::vec_group_id()].
+#'   `adj_factor()` will process this vector with [vctrs::vec_group_id()];
+#'   `adj_factor_int()` expects an (1-indexed) integer vector.
 #' @param n_groups Number of unique groups.
 #' @inheritParams adj
 #'
