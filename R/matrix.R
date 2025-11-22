@@ -39,7 +39,7 @@ adj_from_matrix <- function(
         duplicates = rlang::arg_match(duplicates),
         self_loops = rlang::arg_match(self_loops)
     )
-    out = validate_adj(out)
+    validate_adj(out)
     out
 }
 

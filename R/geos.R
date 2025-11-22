@@ -29,6 +29,6 @@ adj_from_shp <- function(shp) {
     })
 
     out = new_adj(out, duplicates = "error", self_loops = "error")
-    out = validate_adj(out)
+    validate_adj(out)
     out
 }

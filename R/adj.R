@@ -20,12 +20,12 @@
 #' @param ids A vector of unique node identifiers. Each provided vector in `...`
 #'   will be matched to these identifiers. If `NULL`, the identifiers are taken
 #'   to be 1-indexed integers.
-#' @param duplicates Controls handling of duplicate neighbors. The default
+#' @param duplicates Controls handling of duplicate neighbors. The value
 #'   `"warn"` warns the user; `"error"` throws an error; `"allow"` allows
 #'   duplicates, and `"remove"` removes duplicates silently and then sets the
 #'   corresponding attribute to `"error"`.
 #' @param self_loops Controls handling of self-loops (nodes that are adjacent
-#'   to themselves). The default `"warn"` warns the user; `"error"` throws an
+#'   to themselves). The value `"warn"` warns the user; `"error"` throws an
 #'   error; `"allow"` allows self-loops, and `"remove"` removes self-loops
 #'   silently and then sets the corresponding attribute to `"error"`.
 #'
@@ -103,9 +103,6 @@ new_adj <- function(
     )
 }
 
-#' @param x An adjacency list
-#' @export
-#' @rdname adj
 validate_adj <- function(x) {
     if (!is.list(x)) {
         cli::cli_abort("{.arg x} must be a list.")
@@ -161,6 +158,7 @@ validate_adj <- function(x) {
     invisible(x)
 }
 
+#' @param x An `adj` list
 #' @export
 #' @rdname adj
 as_adj <- function(x) {

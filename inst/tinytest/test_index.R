@@ -42,3 +42,22 @@ ac = adj(
 )
 expect_equal(c(a, a), ac)
 expect_equal(c(a), a)
+
+# factor
+af1 = adj(2:3, 1, 1, duplicates = "remove", self_loops = "remove")
+af2 = adj(1:3, 1, 1, duplicates = "remove", self_loops = "allow")
+grp = c(1L, 2L, 3L, 1L)
+expect_equal(adj_factor(a, grp), af1)
+expect_equal(adj_factor_int(a, grp, 3L), af1)
+expect_true(all(af2 == adj_factor(a, grp, self_loops = "allow")))
+expect_true(all(af2 == adj_factor_int(a, grp, 3L, self_loops = "allow")))
+
+
+expect_error(adj_factor(a, 1:5), "match length")
+expect_error(adj_factor(a, 1:2), "match length")
+expect_equal(
+    adj_factor(a, rep(1, 4)),
+    adj(NULL, duplicates = "error", self_loops = "error")
+)
+expect_equal(adj_factor(a, rep(1, 4)), adj_factor(a, rep(-1, 4)))
+expect_equal(adj_factor(a, LETTERS[1:4], duplicates="allow", self_loops="warn"), a)

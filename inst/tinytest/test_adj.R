@@ -9,7 +9,7 @@ a_manual = adj:::new_adj(
     self_loops = "error"
 )
 expect_identical(a, a_manual)
-expect_identical(a_manual, validate_adj(a_manual))
+expect_identical(a_manual, adj:::validate_adj(a_manual))
 
 expect_warning(
     adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "warn"),
@@ -25,4 +25,4 @@ expect_true(all(lengths(a) < 4))
 
 a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
 expect_true(is_adj(a))
-expect_identical(to_list(a, ids = konigsberg$area), konigsberg$bridge_to)
+expect_identical(adj_to_list(a, ids = konigsberg$area), konigsberg$bridge_to)

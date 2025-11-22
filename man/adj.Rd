@@ -2,10 +2,9 @@
 % Please edit documentation in R/adj.R, R/cast.R
 \name{adj}
 \alias{adj}
-\alias{validate_adj}
 \alias{as_adj}
 \alias{is_adj}
-\alias{to_list}
+\alias{adj_to_list}
 \title{Create an adjacency list}
 \usage{
 adj(
@@ -15,13 +14,11 @@ adj(
   self_loops = c("warn", "error", "allow", "remove")
 )
 
-validate_adj(x)
-
 as_adj(x)
 
 is_adj(x)
 
-to_list(x, ids = NULL)
+adj_to_list(x, ids = NULL)
 }
 \arguments{
 \item{...}{Vectors or a single list of vectors. Vectors should be comprised
@@ -34,17 +31,17 @@ neighbors.}
 will be matched to these identifiers. If \code{NULL}, the identifiers are taken
 to be 1-indexed integers.}
 
-\item{duplicates}{Controls handling of duplicate neighbors. The default
+\item{duplicates}{Controls handling of duplicate neighbors. The value
 \code{"warn"} warns the user; \code{"error"} throws an error; \code{"allow"} allows
 duplicates, and \code{"remove"} removes duplicates silently and then sets the
 corresponding attribute to \code{"error"}.}
 
 \item{self_loops}{Controls handling of self-loops (nodes that are adjacent
-to themselves). The default \code{"warn"} warns the user; \code{"error"} throws an
+to themselves). The value \code{"warn"} warns the user; \code{"error"} throws an
 error; \code{"allow"} allows self-loops, and \code{"remove"} removes self-loops
 silently and then sets the corresponding attribute to \code{"error"}.}
 
-\item{x}{An adjacency list}
+\item{x}{An \code{adj} list}
 }
 \value{
 An \code{adj} list

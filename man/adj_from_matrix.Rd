@@ -16,13 +16,13 @@ adj_from_matrix(
 \arguments{
 \item{x}{An adjacency list or matrix}
 
-\item{duplicates}{Controls handling of duplicate neighbors. The default
+\item{duplicates}{Controls handling of duplicate neighbors. The value
 \code{"warn"} warns the user; \code{"error"} throws an error; \code{"allow"} allows
 duplicates, and \code{"remove"} removes duplicates silently and then sets the
 corresponding attribute to \code{"error"}.}
 
 \item{self_loops}{Controls handling of self-loops (nodes that are adjacent
-to themselves). The default \code{"warn"} warns the user; \code{"error"} throws an
+to themselves). The value \code{"warn"} warns the user; \code{"error"} throws an
 error; \code{"allow"} allows self-loops, and \code{"remove"} removes self-loops
 silently and then sets the corresponding attribute to \code{"error"}.}
 

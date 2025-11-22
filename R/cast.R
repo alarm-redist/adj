@@ -29,7 +29,8 @@ vec_cast.adj.adj <- function(x, to, ...) {
 #' @method vec_cast.adj list
 #' @export
 vec_cast.adj.list <- function(x, to, ...) {
-    out = validate_adj(new_adj(x))
+    out = new_adj(x)
+    validate_adj(out)
     out
 }
 
@@ -41,7 +42,7 @@ vec_cast.list.adj <- function(x, to, ...) {
 
 #' @rdname adj
 #' @export
-to_list <- function(x, ids = NULL) {
+adj_to_list <- function(x, ids = NULL) {
     x = vec_cast(x, to = list())
     if (!is.null(ids)) {
         if (length(ids) != length(x)) {
