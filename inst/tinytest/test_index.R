@@ -41,3 +41,4 @@ ac = adj(
     duplicates = "allow"
 )
 expect_equal(c(a, a), ac)
+expect_equal(c(a), a)

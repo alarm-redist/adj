@@ -19,6 +19,8 @@ c.adj <- function(...) {
         return(args[[1]])
     }
 
+    # Concatenating lists is a rare operation, so we won't optimize much
+    # Most of the work is in `shift_index_c()` which is highly optimized
     ll = cumsum(lengths(args))
     out = vector("list", ll[n])
     out[seq_len(ll[1])] = args[[1]]

@@ -69,8 +69,8 @@ SEXP shift_index_c(SEXP x, SEXP shift) {
             pn0[j] = pn[j] + s;
         }
         SET_VECTOR_ELT(result, i, nbors_zero);
-        UNPROTECT(1);
+        UNPROTECT(1); // nbors_zero
     }
-    UNPROTECT(1);
+    UNPROTECT(1); // result
     return result;
 }
