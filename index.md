@@ -11,7 +11,7 @@ You can install the development version of adj from
 
 ``` r
 # install.packages("pak")
-pak::pak("christopherkenny/adj")
+pak::pak("alarm-redist/adj")
 ```
 
 ## Examples

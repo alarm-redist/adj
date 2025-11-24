@@ -10,7 +10,9 @@ processing.
 
 Useful links:
 
-- <http://christophertkenny.com/adj/>
+- <http://alarm-redist.org/adj/>
+
+- <https://github.com/alarm-redist/adj>
 
 ## Author
 
