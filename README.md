@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/christopherkenny/adj/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/christopherkenny/adj/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/alarm-redist/adj/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/alarm-redist/adj/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `adj` provides a lightweight adjacency list class for R, built on the
@@ -19,7 +19,7 @@ You can install the development version of adj from
 
 ``` r
 # install.packages("pak")
-pak::pak("christopherkenny/adj")
+pak::pak("alarm-redist/adj")
 ```
 
 ## Examples
