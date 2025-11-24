@@ -29,4 +29,4 @@ Language: en-US
 Encoding: UTF-8
 Config/build/compilation-database: true
 Config/testthat/edition: 3
-URL: http://christophertkenny.com/adj/
+URL: http://alarm-redist.org/adj/, https://github.com/alarm-redist/adj
