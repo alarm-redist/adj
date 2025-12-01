@@ -78,10 +78,10 @@ rev(a)
 
 Quotient graphs can be created from adjacency lists and a grouping
 vector. Here, we create a quotient graph by grouping the two islands
-together.
+(areas A and D) together.
 
 ``` r
-adj_quotient(a, c("island", "north", "south", "island"))
+adj_quotient(a, c("AD", "B", "C", "AD"))
 #> <adj[3]>
 #> [1] {2, 3} {1}    {1}
 ```

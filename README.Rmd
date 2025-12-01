@@ -67,10 +67,10 @@ rev(a)
 ```
 
 Quotient graphs can be created from adjacency lists and a grouping vector.
-Here, we create a quotient graph by grouping the two islands together.
+Here, we create a quotient graph by grouping the two islands (areas A and D) together.
 
 ```{r}
-adj_quotient(a, c("island", "north", "south", "island"))
+adj_quotient(a, c("AD", "B", "C", "AD"))
 ```
 
 Finally, adjacency lists can be converted to a matrix or zero-indexed.
