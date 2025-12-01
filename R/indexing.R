@@ -30,6 +30,8 @@ NULL
     cli::cli_abort("Assignment is not supported for adjacency lists.")
 }
 
+
+
 #' @rdname adj_indexing
 #' @export
 c.adj <- function(...) {

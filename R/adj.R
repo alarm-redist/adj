@@ -103,7 +103,7 @@ validate_adj <- function(x) {
     }
 
     # check indices
-    all_idx = unlist(vec_data(x))
+    all_idx = unlist(x)
     invalid = all_idx < 1 | all_idx > length(x) | is.na(all_idx)
     if (any(invalid)) {
         cli::cli_abort(c(

@@ -2,6 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom graphics lines
 #' @useDynLib adj, .registration = TRUE
 ## usethis namespace: end
 NULL

@@ -11,6 +11,16 @@ test_that("basic subsetting works", {
     expect_identical(a[1:2], a[c(1, 3)])
 })
 
+test_that("vctrs indexing works", {
+    a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
+
+    expect_identical(a[1:3], vec_slice(a, 1:3))
+    expect_identical(a[4:1], vec_slice(a, 4:1))
+    expect_identical(a[1], vec_slice(a, 1))
+    expect_identical(a[0], vec_slice(a, 0))
+    expect_error(vec_slice(a[1:5]), "end")
+})
+
 test_that("subsetting with duplicates works", {
     a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
     expect_identical(a[1], adj(NULL, duplicates = "allow"))

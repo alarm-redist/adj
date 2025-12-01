@@ -1,0 +1,11 @@
+test_that("plotting works", {
+    a <- adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
+    xy = cbind(konigsberg$x, konigsberg$y)
+    expect_silent(plot(a))
+    expect_silent(plot(a))
+    expect_silent(plot(a, edges = "l"))
+    expect_silent(plot(a, xy))
+    expect_silent(plot(a, xy, edges = "s"))
+    expect_silent(plot(a, xy, xlab = "Latitude", ylab = "Longitude"))
+    expect_silent(plot(a, xy, nodes = FALSE))
+})

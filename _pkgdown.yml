@@ -18,5 +18,6 @@ reference:
 - title: Other
 - contents:
   - format.adj
+  - plot.adj
   - konigsberg
 

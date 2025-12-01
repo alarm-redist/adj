@@ -4,7 +4,7 @@
 \alias{plot.adj}
 \title{Basic plotting for adjacency lists}
 \usage{
-\method{plot}{adj}(x, y = NULL, edges = NULL, nodes = TRUE, xlab = NULL, ylab = NULL, ...)
+\method{plot}{adj}(x, y = NULL, edges = NULL, nodes = TRUE, xlab = NA, ylab = NA, ...)
 }
 \arguments{
 \item{x}{An \code{adj} list}
@@ -36,6 +36,6 @@ between each pair of nodes. Self loops are represented with larger points.
 plot(adj(2, c(1, 3), 2))
 plot(adj(2, c(1, 2, 3), c(2, 2, 2), self_loops="allow", duplicates="allow"))
 
-a <- adj(konigsberg$bridge_to, ids = konigsberg$area)
+a <- adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
 plot(a, konigsberg[c("x", "y")])
 }

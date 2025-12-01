@@ -17,7 +17,7 @@ vec_cast.adj <- function(x, to, ...) {
 #' @method vec_cast.adj default
 #' @export
 vec_cast.adj.default <- function(x, to, ...) {
-    vec_default_cast(vec_data(x), to, ...) # nocov
+    vec_default_cast(unclass(x), to, ...) # nocov
 }
 
 #' @method vec_cast.adj adj
@@ -37,7 +37,7 @@ vec_cast.adj.list <- function(x, to, ...) {
 #' @method vec_cast.list adj
 #' @export
 vec_cast.list.adj <- function(x, to, ...) {
-    vec_data(x)
+    as.list(x)
 }
 
 #' @rdname adj

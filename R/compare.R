@@ -1,6 +1,6 @@
 #' @export
 vec_proxy_equal.adj <- function(x, ...) {
-    lapply(vec_data(x), sort.int, na.last = TRUE)
+    lapply(unclass(x), sort.int, na.last = TRUE)
 }
 
 #' @export
@@ -10,5 +10,19 @@ vec_proxy_compare.adj <- function(x, ...) {
 #' @export
 vec_proxy_order.adj <- function(x, ...) {
     cli::cli_abort("Comparisons are not supported for adjacency lists.")
+}
+
+# Hacky :( to handle indexing
+#' @export
+vec_proxy.adj <- function(x, ...) {
+    seq_along(x)
+}
+#' @export
+vec_restore.adj <- function(x, to, ...) {
+    if (is.integer(x)) {
+        to[x]
+    } else {
+        NextMethod()
+    }
 }
 
