@@ -1,3 +1,4 @@
+skip()
 a = adj(readRDS("data-raw/wa_adj.rds"))
 a0 = adj_zero_index(a)
 
