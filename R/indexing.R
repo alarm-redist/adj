@@ -1,3 +1,24 @@
+#' Indexing operations on adjacency lists
+#'
+#' `adj` overrides the default `[` and `c()` methods to allow for filtering,
+#' reordering, and concatenating adjacency lists while ensuring that indices
+#' remain internally consistent.
+#'
+#' @param x An adjacency list of class `adj`
+#' @param i Indexing vector
+#' @param ... For `c()`, adjacency lists to concatenate. Ignored for `[`.
+#'
+#' @examples
+#' a <- adj(c(2, 3), c(1, 3), c(1, 2))
+#' a[1:2]
+#' all(sample(a) == a) # any permutation yields the same graph
+#'
+#' a <- adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "remove")
+#' c(a, a) # concatenates graphs with no connecting edges
+#' @name adj_indexing
+NULL
+
+#' @rdname adj_indexing
 #' @export
 `[.adj` <- function(x, i, ...) {
     i = vec_as_location(i, length(x), names = names(x), missing = "error", arg = "i")
@@ -9,6 +30,7 @@
     cli::cli_abort("Assignment is not supported for adjacency lists.")
 }
 
+#' @rdname adj_indexing
 #' @export
 c.adj <- function(...) {
     args = vec_cast_common(..., .to = new_adj())
@@ -33,17 +55,17 @@ c.adj <- function(...) {
     vec_restore(out, args[[1]])
 }
 
-#' Factor adjacency list
+#' Quotient an adjacency list by a vector
 #'
-#' Computes the factor graph of a given adjacency list by a provided grouping
-#' vector. Nodes in the same groups are merged into single nodes in the factor
+#' Computes the quotient graph of a given adjacency list by a provided grouping
+#' vector. Nodes in the same groups are merged into single nodes in the quotient
 #' graph. The resulting multi-edges and self-loops are handled according to the
 #' specified parameters.
 #'
 #' @param x An `adj` list
 #' @param groups A vector specifying the group membership for each node in `x`.
-#'   `adj_factor()` will process this vector with [vctrs::vec_group_id()];
-#'   `adj_factor_int()` expects an (1-indexed) integer vector.
+#'   `adj_quotient()` will process this vector with [vctrs::vec_group_id()];
+#'   `adj_quotient_int()` expects an (1-indexed) integer vector.
 #' @param n_groups Number of unique groups.
 #' @inheritParams adj
 #'
@@ -52,17 +74,17 @@ c.adj <- function(...) {
 #' @examples
 #' a <- adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
 #' # merge two islands (A and D)
-#' adj_factor(a, c("AD", "B", "C", "AD"))
-#' adj_factor_int(a, c(1L, 2L, 3L, 1L), n_group = 3L, self_loops = "allow")
+#' adj_quotient(a, c("AD", "B", "C", "AD"))
+#' adj_quotient_int(a, c(1L, 2L, 3L, 1L), n_group = 3L, self_loops = "allow")
 #' @export
-adj_factor <- function(
+adj_quotient <- function(
     x,
     groups,
     duplicates = c("remove", "allow", "error", "warn"),
     self_loops = c("remove", "allow", "error", "warn")
 ) {
     groups = vec_group_id(groups)
-    adj_factor_int(
+    adj_quotient_int(
         x,
         groups,
         attr(groups, "n"),
@@ -71,9 +93,9 @@ adj_factor <- function(
     )
 }
 
-#' @rdname adj_factor
+#' @rdname adj_quotient
 #' @export
-adj_factor_int <- function(
+adj_quotient_int <- function(
     x,
     groups,
     n_groups,
@@ -82,7 +104,7 @@ adj_factor_int <- function(
 ) {
     duplicates = rlang::arg_match(duplicates)
     self_loops = rlang::arg_match(self_loops)
-    out = .Call(factor_c, x, groups, n_groups, duplicates != "remove", self_loops != "remove")
+    out = .Call(quotient_c, x, groups, n_groups, duplicates != "remove", self_loops != "remove")
 
     validate = all(c(duplicates, self_loops) %in% c("warn", "error"))
     if (duplicates == "remove") {

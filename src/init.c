@@ -8,12 +8,12 @@
 
 /* .Call calls */
 extern SEXP reindex_c(SEXP x, SEXP i);
-extern SEXP factor_c(SEXP x, SEXP g, SEXP n_group, SEXP dups, SEXP loops);
+extern SEXP quotient_c(SEXP x, SEXP g, SEXP n_group, SEXP dups, SEXP loops);
 extern SEXP shift_index_c(SEXP x, SEXP shift);
 
 static const R_CallMethodDef CallEntries[] = {
     {"reindex_c", (DL_FUNC) &reindex_c, 2},
-    {"factor_c", (DL_FUNC) &factor_c, 5},
+    {"quotient_c", (DL_FUNC) &quotient_c, 5},
     {"shift_index_c", (DL_FUNC) &shift_index_c, 2},
     {NULL, NULL, 0}
 };

@@ -3,3 +3,20 @@ template:
   bootstrap: 5
   bootswatch: journal
   bg: light
+reference:
+- title: Build an adjacency list
+- contents:
+  - adj
+  - adj_from_matrix
+  - adj_from_shp
+- title: Adjacency list operations
+- contents:
+  - adj_indexing
+  - adj_quotient
+  - adj_edges
+  - adj_zero_index
+- title: Other
+- contents:
+  - format.adj
+  - konigsberg
+

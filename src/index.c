@@ -58,11 +58,11 @@ SEXP reindex_c(SEXP x, SEXP i) {
 }
 
 
-// Factor an adjacency list
+// Build quotient graph an adjacency list
 // Requires (but does not verify) that x is a list of integer vectors
 //  and g is an equal-length vector of integers between 1 and `n_g`
 // `dups` and `loops` control whether duplicates and self-loops are allowed
-SEXP factor_c(SEXP x, SEXP g, SEXP n_group, SEXP dups, SEXP loops) {
+SEXP quotient_c(SEXP x, SEXP g, SEXP n_group, SEXP dups, SEXP loops) {
     int n = Rf_length(x);
     if (n != Rf_length(g)) {
         Rf_error("Length of group vector must match length of adjacency list");

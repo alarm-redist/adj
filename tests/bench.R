@@ -1,4 +1,7 @@
-a = adj(readRDS("data-raw/wa_adj.rds"))
+# fmt: skip file
+if (FALSE) { # to make covr happy
+
+a = adj(readRDS("data-raw/adj_wa.rds"))
 a0 = adj_zero_index(a)
 
 bench::mark(
@@ -21,16 +24,16 @@ g1000_0 = g1000 - 1L
 
 check_equiv(
     redist:::collapse_adj(a0, g1000_0),
-    adj_factor_int(a, g1000, n_groups = 1000L)
+    adj_quotient_int(a, g1000, n_groups = 1000L)
 )
 check_equiv(
     redist::redist.coarsen.adjacency(a0, g1000),
-    adj_factor_int(a, g1000, n_groups = 1000L)
+    adj_quotient_int(a, g1000, n_groups = 1000L)
 )
 
 bench::mark(
-    adj = adj_factor_int(a, g10, n_groups = 10L),
-    adj_dup = adj_factor_int(
+    adj = adj_quotient_int(a, g10, n_groups = 10L),
+    adj_dup = adj_quotient_int(
         a,
         g10,
         n_groups = 10L,
@@ -42,8 +45,8 @@ bench::mark(
     check = FALSE
 )
 bench::mark(
-    adj = adj_factor_int(a, g100, n_groups = 100L),
-    adj_dup = adj_factor_int(
+    adj = adj_quotient_int(a, g100, n_groups = 100L),
+    adj_dup = adj_quotient_int(
         a,
         g100,
         n_groups = 100L,
@@ -55,8 +58,8 @@ bench::mark(
     check = FALSE
 )
 bench::mark(
-    adj = adj_factor_int(a, g1000, n_groups = 1000L),
-    adj_dup = adj_factor_int(
+    adj = adj_quotient_int(a, g1000, n_groups = 1000L),
+    adj_dup = adj_quotient_int(
         a,
         g1000,
         n_groups = 1000L,
