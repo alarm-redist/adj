@@ -1,6 +1,6 @@
 # Create an `adj` list from a set of spatial polygons
 
-Create an `adj` list from a set of spatial polygons
+Requires that the `geos` package be installed.
 
 ## Usage
 
