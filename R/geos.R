@@ -1,5 +1,7 @@
 #' Create an `adj` list from a set of spatial polygons
 #'
+#' Requires that the `geos` package be installed.
+#'
 #' @param shp An object convertible to `geos` geometries representing polygons, such
 #' as an `sf` object, well-known text strings, or `geos` geometries.
 #'

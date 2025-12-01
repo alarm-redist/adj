@@ -14,7 +14,7 @@ as an \code{sf} object, well-known text strings, or \code{geos} geometries.}
 An \code{adj} list
 }
 \description{
-Create an \code{adj} list from a set of spatial polygons
+Requires that the \code{geos} package be installed.
 }
 \examples{
 shp <- c(
