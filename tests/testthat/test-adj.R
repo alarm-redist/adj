@@ -35,6 +35,6 @@ test_that("koningsberg adj list works", {
 })
 
 test_that("adj fails on invalid inputs", {
-    expect_error(adj(list(2, "A")), 'list of integer vectors')
-    expect_error(adj(list(2, 3)), 'Out-of-bounds')
+    expect_error(adj(2, "A"), 'list of integer vectors')
+    expect_error(adj(2, 3), 'Out-of-bounds')
 })
