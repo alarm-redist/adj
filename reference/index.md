@@ -8,6 +8,11 @@
   [`adj_to_list()`](https://alarm-redist.org/adj/reference/adj.md) :
   Create an adjacency list
 
+- [`adj_add_edges()`](https://alarm-redist.org/adj/reference/adj_add_edges.md)
+  :
+
+  Add edges to an `adj` list
+
 - [`adj_factor()`](https://alarm-redist.org/adj/reference/adj_factor.md)
   [`adj_factor_int()`](https://alarm-redist.org/adj/reference/adj_factor.md)
   : Factor adjacency list
@@ -20,6 +25,11 @@
   :
 
   Create an `adj` list from a set of spatial polygons
+
+- [`adj_subtract_edges()`](https://alarm-redist.org/adj/reference/adj_subtract_edges.md)
+  :
+
+  Subtract edges from an `adj` list
 
 - [`adj_zero_index()`](https://alarm-redist.org/adj/reference/adj_zero_index.md)
   : Convert adjacency list to use zero-based indices
