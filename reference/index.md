@@ -25,6 +25,8 @@
 - [`adj_quotient()`](https://alarm-redist.org/adj/reference/adj_quotient.md)
   [`adj_quotient_int()`](https://alarm-redist.org/adj/reference/adj_quotient.md)
   : Quotient an adjacency list by a vector
+- [`adj_color()`](https://alarm-redist.org/adj/reference/adj_color.md) :
+  Find a coloring of an adjacency list
 - [`adj_add_edges()`](https://alarm-redist.org/adj/reference/adj_edges.md)
   [`adj_subtract_edges()`](https://alarm-redist.org/adj/reference/adj_edges.md)
   : Add and subtract edges from an adjacency list

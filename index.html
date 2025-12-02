@@ -95,9 +95,9 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;adj[4]&gt;</span></span>
 <span><span class="co">#&gt; [1] {4, 3, 2}    {4, 4, 1}    {4, 4, 1}    {3, 3, 2, …}</span></span></code></pre></div>
-<p>Quotient graphs can be created from adjacency lists and a grouping vector. Here, we create a quotient graph by grouping the two islands together.</p>
+<p>Quotient graphs can be created from adjacency lists and a grouping vector. Here, we create a quotient graph by grouping the two islands (areas A and D) together.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/adj_quotient.html">adj_quotient</a></span><span class="op">(</span><span class="va">a</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"island"</span>, <span class="st">"north"</span>, <span class="st">"south"</span>, <span class="st">"island"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/adj_quotient.html">adj_quotient</a></span><span class="op">(</span><span class="va">a</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AD"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"AD"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;adj[3]&gt;</span></span>
 <span><span class="co">#&gt; [1] {2, 3} {1}    {1}</span></span></code></pre></div>
 <p>Finally, adjacency lists can be converted to a matrix or zero-indexed.</p>
