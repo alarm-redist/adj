@@ -13,6 +13,7 @@ reference:
 - contents:
   - adj_indexing
   - adj_quotient
+  - adj_color
   - adj_edges
   - adj_zero_index
 - title: Other
