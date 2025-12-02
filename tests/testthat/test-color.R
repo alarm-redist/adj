@@ -9,6 +9,8 @@ test_that("graph coloring works", {
     expect_true(same_grps(adj_color(a), c(1L, 2L, 2L, 3L)))
     expect_true(same_grps(adj_color(a, method = "greedy"), c(1L, 2L, 2L, 3L)))
     expect_true(same_grps(adj_color(a, colors = 3), c(1L, 2L, 2L, 3L)))
+    expect_true(same_grps(adj_color(a, colors = 5), 1:4))
+    expect_error(adj_color(a, colors = 2), "enough")
     expect_true(same_grps(adj_color(a, colors = 3, method = "greedy"), c(1L, 2L, 2L, 3L)))
     expect_true(same_grps(adj_color(a, groups = c("AD", "BC", "BC", "AD")), c(1L, 2L, 2L, 1L)))
 })

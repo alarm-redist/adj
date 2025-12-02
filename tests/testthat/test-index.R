@@ -68,6 +68,7 @@ test_that("adj_quotient works", {
     af2 = adj(1:3, 1, 1, duplicates = "remove", self_loops = "allow")
     grp = c(1L, 2L, 3L, 1L)
     expect_equal(adj_quotient(a, grp), af1)
+    expect_warning(adj_quotient(a, grp, self_loops = "warn"), "self-loop")
     expect_equal(adj_quotient_int(a, grp, 3L), af1)
     expect_true(all(af2 == adj_quotient(a, grp, self_loops = "allow")))
     expect_true(all(af2 == adj_quotient_int(a, grp, 3L, self_loops = "allow")))

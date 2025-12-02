@@ -22,11 +22,11 @@ adj_from_matrix <- function(
     self_loops = c("warn", "error", "allow", "remove")
 ) {
     if (!is.matrix(x)) {
-        cli::cli_abort("{.arg x} must be a matrix.")
+        cli::cli_abort("{.arg x} must be a matrix.") # nocov
     }
     n = nrow(x)
     if (n != ncol(x)) {
-        cli::cli_abort("{.arg x} must be a square matrix.")
+        cli::cli_abort("{.arg x} must be a square matrix.") # nocov
     }
 
     out = vector("list", n)

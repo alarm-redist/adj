@@ -8,6 +8,10 @@ test_that("adj_from_matrix works", {
     x = as.matrix(a)
     expect_equal(a, adj_from_matrix(x, duplicates = "allow"))
 
+    a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "remove")
+    x = as.matrix(a)
+    expect_equal(a, adj_from_matrix(x, duplicates = "error"))
+
     x = diag(3) * 0 + 1
     expect_warning(adj_from_matrix(x), "self-loops")
 })

@@ -32,6 +32,7 @@ test_that("koningsberg adj list works", {
     a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
     expect_true(is_adj(a))
     expect_identical(adj_to_list(a, ids = konigsberg$area), konigsberg$bridge_to)
+    expect_error(adj_to_list(a, ids = LETTERS[1:5]), "same")
 })
 
 test_that("adj fails on invalid inputs", {

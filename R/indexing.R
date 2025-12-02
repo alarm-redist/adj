@@ -27,7 +27,7 @@ NULL
 }
 #' @export
 `[<-.adj` <- function(x, i, value) {
-    cli::cli_abort("Assignment is not supported for adjacency lists.")
+    cli::cli_abort("Assignment is not supported for adjacency lists.") # nocov
 }
 
 
@@ -73,7 +73,7 @@ c.adj <- function(...) {
 #' @export
 adj_zero_index <- function(x) {
     if (!is.list(x)) {
-        cli::cli_abort("{.arg x} must be an object of class {.cls adj}.")
+        cli::cli_abort("{.arg x} must be an object of class {.cls adj}.") # nocov
     }
 
     .Call(shift_index_c, x, -1L)

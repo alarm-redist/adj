@@ -49,7 +49,7 @@ adj_quotient_int <- function(
     self_loops = rlang::arg_match(self_loops)
     out = .Call(quotient_c, x, groups, n_groups, duplicates != "remove", self_loops != "remove")
 
-    validate = all(c(duplicates, self_loops) %in% c("warn", "error"))
+    validate = any(c(duplicates, self_loops) %in% c("warn", "error"))
     if (duplicates == "remove") {
         duplicates = "error"
     }
