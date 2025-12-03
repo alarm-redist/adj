@@ -14,3 +14,4 @@
 ^pkgdown$
 ^codecov\.yml$
 ^\.covrignore$
+^cran-comments\.md$
