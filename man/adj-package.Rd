@@ -10,7 +10,7 @@ Provides an S3 class to represent graph adjacency lists using 'vctrs'. Allows fo
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://alarm-redist.org/adj/}
+  \item \url{https://alarm-redist.org/adj/}
   \item \url{https://github.com/alarm-redist/adj}
 }
 
