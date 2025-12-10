@@ -30,6 +30,11 @@ c(...)
   For [`c()`](https://rdrr.io/r/base/c.html), adjacency lists to
   concatenate. Ignored for `[`.
 
+## Value
+
+A reindexed adjacency list for `[`, and a concatenated adjacency list
+for [`c()`](https://rdrr.io/r/base/c.html).
+
 ## Examples
 
 ``` r
