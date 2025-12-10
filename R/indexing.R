@@ -8,6 +8,8 @@
 #' @param i Indexing vector
 #' @param ... For `c()`, adjacency lists to concatenate. Ignored for `[`.
 #'
+#' @returns A reindexed adjacency list for `[`, and a concatenated adjacency list for `c()`.
+#'
 #' @examples
 #' a <- adj(c(2, 3), c(1, 3), c(1, 2))
 #' a[1:2]

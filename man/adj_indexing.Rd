@@ -17,6 +17,9 @@
 
 \item{...}{For \code{c()}, adjacency lists to concatenate. Ignored for \code{[}.}
 }
+\value{
+A reindexed adjacency list for \code{[}, and a concatenated adjacency list for \code{c()}.
+}
 \description{
 \code{adj} overrides the default \code{[} and \code{c()} methods to allow for filtering,
 reordering, and concatenating adjacency lists while ensuring that indices
