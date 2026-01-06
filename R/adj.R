@@ -172,6 +172,15 @@ validate_adj <- function(x) {
     invisible(x)
 }
 
+# Helper to add back attributes
+reconstruct_adj <- function(x, old) {
+    new_adj(
+        x = x,
+        duplicates = attr(old, "duplicates"),
+        self_loops = attr(old, "self_loops")
+    )
+}
+
 #' @param x An `adj` list
 #' @export
 #' @rdname adj

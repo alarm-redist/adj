@@ -19,10 +19,6 @@ vec_proxy.adj <- function(x, ...) {
 }
 #' @export
 vec_restore.adj <- function(x, to, ...) {
-    if (is.integer(x)) {
-        to[x]
-    } else {
-        NextMethod()
-    }
+    to[x]
 }
 

@@ -23,9 +23,9 @@ NULL
 #' @rdname adj_indexing
 #' @export
 `[.adj` <- function(x, i, ...) {
-    i = vec_as_location(i, length(x), names = names(x), missing = "error", arg = "i")
+    i = vec_as_location(i, length(x), names = names(x), missing = "propagate", arg = "i")
     out = .Call(reindex_c, x, i)
-    vec_restore(out, x)
+    reconstruct_adj(out, x)
 }
 #' @export
 `[<-.adj` <- function(x, i, value) {
@@ -56,7 +56,7 @@ c.adj <- function(...) {
         }
     }
 
-    vec_restore(out, args[[1]])
+    reconstruct_adj(out, args[[1]])
 }
 
 #' Convert adjacency list to use zero-based indices
