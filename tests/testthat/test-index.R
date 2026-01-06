@@ -9,6 +9,10 @@ test_that("basic subsetting works", {
     expect_identical(a[1:2], a[2:1])
     expect_identical(a[1:2], a[2:3])
     expect_identical(a[1:2], a[c(1, 3)])
+
+    expect_identical(a[1:2], a[c(1, 3)])
+
+    expect_identical(a[c(NA, 1:3)], adj(integer(0), c(3, 4), c(2, 4), c(2, 3)))
 })
 
 test_that("vctrs indexing works", {

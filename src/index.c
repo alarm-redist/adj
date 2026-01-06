@@ -8,6 +8,7 @@
 SEXP reindex_c(SEXP x, SEXP i) {
     int n_in = Rf_length(x);
     int n_out = Rf_length(i);
+    SEXP result = PROTECT(Rf_allocVector(VECSXP, n_out));
 
     int* pi = INTEGER(i);
 
@@ -17,6 +18,12 @@ SEXP reindex_c(SEXP x, SEXP i) {
         lookup[idx] = 0;
     }
     for (int idx = 0; idx < n_out; idx++) {
+        if (pi[idx] == NA_INTEGER) {
+            SEXP nbors_out = PROTECT(Rf_allocVector(INTSXP, 0));
+            SET_VECTOR_ELT(result, idx, nbors_out);
+            UNPROTECT(1);
+            continue;
+        }
         int i_idx = pi[idx] - 1;
         if (lookup[i_idx] != 0) {
             Rf_error("Duplicate indices in reindexing vector");
@@ -25,7 +32,6 @@ SEXP reindex_c(SEXP x, SEXP i) {
     }
 
     // Reindex adjacency list
-    SEXP result = PROTECT(Rf_allocVector(VECSXP, n_out));
     for (int idx = 0; idx < n_in; idx++) {
         int new_idx = lookup[idx];
         if (new_idx == 0) continue;
