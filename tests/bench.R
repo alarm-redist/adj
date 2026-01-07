@@ -9,6 +9,11 @@ bench::mark(
     naive = lapply(a, function(nbors) nbors - 1L),
 )
 
+i1 = seq_along(a)
+i2 = c(1, seq_along(a))
+bench::mark(a[i1])
+bench::mark(a[i2])
+
 check_equiv <- function(x_redist, x_adj) {
     x_redist = new_adj(.Call(adj:::shift_index_c, x = x_redist, shift = 1L))
     all(x_redist == x_adj)
@@ -71,4 +76,4 @@ bench::mark(
     check = FALSE
 )
 
-}#
+}

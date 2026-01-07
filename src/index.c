@@ -26,7 +26,9 @@ SEXP reindex_c(SEXP x, SEXP i) {
         }
         int i_idx = pi[idx] - 1;
         if (lookup[i_idx] != 0) {
-            Rf_error("Duplicate indices in reindexing vector");
+            UNPROTECT(1); // out and result
+            return R_NilValue;
+            // Rf_error("Duplicate indices in reindexing vector");
         }
         lookup[i_idx] = idx + 1;
     }

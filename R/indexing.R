@@ -23,15 +23,27 @@ NULL
 #' @rdname adj_indexing
 #' @export
 `[.adj` <- function(x, i, ...) {
-    i = vec_as_location(i, length(x), names = names(x), missing = "propagate", arg = "i")
+    i = vec_as_location(i, length(x), names = names(x), arg = "i")
     out = .Call(reindex_c, x, i)
-    reconstruct_adj(out, x)
+    if (is.null(out)) {
+        slice_adj(x, i) # duplicate indices
+    } else {
+        reconstruct_adj(out, x)
+    }
 }
 #' @export
 `[<-.adj` <- function(x, i, value) {
     cli::cli_abort("Assignment is not supported for adjacency lists.") # nocov
 }
 
+# slow reindexing but correct with duplicate indices
+slice_adj <- function(x, i) {
+    adj_from_matrix(
+        x = as.matrix(x)[i, i],
+        duplicates = attr(x, "duplicates"),
+        self_loops = attr(x, "self_loops")
+    )
+}
 
 
 #' @rdname adj_indexing

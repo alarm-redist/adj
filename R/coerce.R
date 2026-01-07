@@ -37,3 +37,9 @@ vec_ptype2.adj.list <- function(x, y, ...) {
 vec_ptype2.list.adj <- function(x, y, ...) {
     list() # nocov
 }
+
+# helps performance
+#' @export
+vec_ptype.adj <- function(x, ..., x_arg = "", call = caller_env()) {
+    new_adj() # nocov
+}

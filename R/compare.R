@@ -19,6 +19,7 @@ vec_proxy.adj <- function(x, ...) {
 }
 #' @export
 vec_restore.adj <- function(x, to, ...) {
+    # print(list(x = x, to = to))
     to[x]
 }
 

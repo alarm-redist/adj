@@ -13,12 +13,14 @@ test_that("basic subsetting works", {
     expect_identical(a[1:2], a[c(1, 3)])
 
     expect_identical(a[c(NA, 1:3)], adj(integer(0), c(3, 4), c(2, 4), c(2, 3)))
+    expect_identical(a[c(1, 1:3)], adj(c(3, 4), c(3, 4), c(1, 2, 4), c(1, 2, 3)))
 })
 
 test_that("vctrs indexing works", {
     a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
 
     expect_identical(a[1:3], vec_slice(a, 1:3))
+    expect_identical(a[c(1, 1:3)], vec_slice(a, c(1, 1:3)))
     expect_identical(a[4:1], vec_slice(a, 4:1))
     expect_identical(a[1], vec_slice(a, 1))
     expect_identical(a[0], vec_slice(a, 0))
@@ -29,7 +31,6 @@ test_that("subsetting with duplicates works", {
     a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
     expect_identical(a[1], adj(NULL, duplicates = "allow"))
     expect_identical(a[2:3], adj(NULL, NULL, duplicates = "allow"))
-    expect_error(a[c(2, 2)])
 })
 
 test_that("subsetting compatible with matrix subsetting", {
