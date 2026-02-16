@@ -34,8 +34,8 @@ adj_add_edges <- function(x, v1, v2, ids = NULL) {
     duplicates <- attr(x, "duplicates")
     self_loops <- attr(x, "self_loops")
 
-    v1 = match_check_ids(list(v1), ids)[[1]]
-    v2 = match_check_ids(list(v2), ids, check_dups = FALSE)[[1]]
+    v1 = as.integer(match_check_ids(list(v1), ids)[[1]])
+    v2 = as.integer(match_check_ids(list(v2), ids, check_dups = FALSE)[[1]])
 
     if (duplicates != "allow") {
         join_fn <- union

@@ -52,3 +52,19 @@ adj_to_list <- function(x, ids = NULL) {
     }
     x
 }
+
+#' @export
+as.data.frame.adj <- function(
+    x,
+    row.names = NULL,
+    optional = FALSE,
+    ...,
+    nm = paste(deparse(substitute(x), width.cutoff = 500L), collapse = " ")
+) {
+    force(nm)
+    cols <- list(x)
+    if (!optional) {
+        names(cols) <- nm
+    }
+    new_data_frame(cols, n = length(x))
+}

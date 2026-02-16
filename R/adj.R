@@ -105,12 +105,11 @@ new_adj <- function(
     duplicates = "warn",
     self_loops = "warn"
 ) {
-    new_list_of(
+    structure(
         x,
-        ptype = integer(),
         duplicates = duplicates,
         self_loops = self_loops,
-        class = "adj"
+        class = c("adj", "list")
     )
 }
 
@@ -192,4 +191,14 @@ as_adj <- function(x) {
 #' @rdname adj
 is_adj <- function(x) {
     inherits(x, "adj")
+}
+
+
+#' @export
+`dim<-.adj` <- function(x, value) {
+    cli::cli_abort("Adjacency lists do not have dimensions.")
+}
+#' @export
+`levels<-.adj` <- function(x, value) {
+    cli::cli_abort("Adjacency lists do not have dimensions.")
 }

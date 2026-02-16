@@ -2,9 +2,12 @@
 % Please edit documentation in R/format.R
 \name{format.adj}
 \alias{format.adj}
+\alias{print.adj}
 \title{Format and print methods for adjacency lists}
 \usage{
 \method{format}{adj}(x, n = 3, ...)
+
+\method{print}{adj}(x, n = 3, ...)
 }
 \arguments{
 \item{x}{An \code{adj} list.}
