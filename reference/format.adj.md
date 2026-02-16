@@ -7,6 +7,9 @@ Adjacency lists are printed as sets of indices for each node.
 ``` r
 # S3 method for class 'adj'
 format(x, n = 3, ...)
+
+# S3 method for class 'adj'
+print(x, n = 3, ...)
 ```
 
 ## Arguments

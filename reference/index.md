@@ -36,6 +36,7 @@
 ## Other
 
 - [`format(`*`<adj>`*`)`](https://alarm-redist.org/adj/reference/format.adj.md)
+  [`print(`*`<adj>`*`)`](https://alarm-redist.org/adj/reference/format.adj.md)
   : Format and print methods for adjacency lists
 - [`plot(`*`<adj>`*`)`](https://alarm-redist.org/adj/reference/plot.adj.md)
   : Basic plotting for adjacency lists
