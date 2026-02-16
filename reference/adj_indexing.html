@@ -71,6 +71,14 @@ remain internally consistent.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A reindexed adjacency list for <code>[</code>, and a concatenated adjacency list for <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code>.</p>
     </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>When duplicate indices are present in the adjacency list, indexing is
+performed by slicing the adjacency matrix, which is slower and requires
+more memory. For large adjacency lists, slicing with duplicates will
+error for this reason; set <code>options(adj.max_matrix_slice = Inf)</code> to allow it,
+but be aware of the possible memory usage implications.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>

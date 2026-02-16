@@ -35,6 +35,14 @@ c(...)
 A reindexed adjacency list for `[`, and a concatenated adjacency list
 for [`c()`](https://rdrr.io/r/base/c.html).
 
+## Details
+
+When duplicate indices are present in the adjacency list, indexing is
+performed by slicing the adjacency matrix, which is slower and requires
+more memory. For large adjacency lists, slicing with duplicates will
+error for this reason; set `options(adj.max_matrix_slice = Inf)` to
+allow it, but be aware of the possible memory usage implications.
+
 ## Examples
 
 ``` r
