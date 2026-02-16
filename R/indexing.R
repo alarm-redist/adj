@@ -92,28 +92,3 @@ adj_zero_index <- function(x) {
 
     .Call(shift_index_c, x, -1L)
 }
-
-# Unsupported ops
-
-#' @export
-`[<-.adj` <- function(x, i, value) {
-    cli::cli_abort("Assignment is not supported for adjacency lists.") # nocov
-}
-
-#' @export
-`$.adj` <- function(x, i) {
-    cli::cli_abort("Use `[[` to extract elements from an adjacency list.") # nocov
-}
-#' @export
-`$<-.adj` <- function(x, i, value) {
-    cli::cli_abort("Use `[[<-` to assign elements in an adjacency list.") # nocov
-}
-
-#' @export
-rep.adj <- function(x, ...) {
-    cli::cli_abort("Replication is not supported for adjacency lists.") # nocov
-}
-#' @export
-`length<-.adj` <- function(x, value) {
-    cli::cli_abort("Length modification is not supported for adjacency lists.") # nocov
-}

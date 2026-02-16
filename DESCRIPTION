@@ -1,6 +1,6 @@
 Package: adj
 Title: Lightweight Adjacency Lists
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: c(
     person("Christopher T.", "Kenny", , "ctkenny@proton.me", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9386-6860")),
