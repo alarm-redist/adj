@@ -40,7 +40,10 @@ test_that("subsetting compatible with matrix subsetting", {
     test_idx = list(
         integer(0),
         4:1,
-        c(2, 3, 1)
+        c(2, 3, 1),
+        c(1, 1, 2),
+        c(NA),
+        c(2, NA, 1, 2)
     )
     for (idx in test_idx) {
         expect_true(all(a[idx] == adj_from_matrix(m[idx, idx], duplicates = "allow")))

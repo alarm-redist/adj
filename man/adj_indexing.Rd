@@ -25,6 +25,13 @@ A reindexed adjacency list for \code{[}, and a concatenated adjacency list for \
 reordering, and concatenating adjacency lists while ensuring that indices
 remain internally consistent.
 }
+\details{
+When duplicate indices are present in the adjacency list, indexing is
+performed by slicing the adjacency matrix, which is slower and requires
+more memory. For large adjacency lists, slicing with duplicates will
+error for this reason; set \code{options(adj.max_matrix_slice = Inf)} to allow it,
+but be aware of the possible memory usage implications.
+}
 \examples{
 a <- adj(c(2, 3), c(1, 3), c(1, 2))
 a[1:2]

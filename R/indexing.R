@@ -4,6 +4,12 @@
 #' reordering, and concatenating adjacency lists while ensuring that indices
 #' remain internally consistent.
 #'
+#' When duplicate indices are present in the adjacency list, indexing is
+#' performed by slicing the adjacency matrix, which is slower and requires
+#' more memory. For large adjacency lists, slicing with duplicates will
+#' error for this reason; set `options(adj.max_matrix_slice = Inf)` to allow it,
+#' but be aware of the possible memory usage implications.
+#'
 #' @param x An adjacency list of class `adj`
 #' @param i Indexing vector
 #' @param ... For `c()`, adjacency lists to concatenate. Ignored for `[`.
@@ -34,6 +40,16 @@ NULL
 
 # slow reindexing but correct with duplicate indices
 slice_adj <- function(x, i) {
+    if (length(x) >= getOption("adj.max_matrix_slice", 500L)) {
+        cli::cli_abort(
+            c(
+                "{.arg x} is too large to automatically slice with duplicate indices",
+                "i" = "Duplicate indices require materializing the full adjacency matrix, which can be memory intensive.",
+                ">" = "Set {.code options(adj.max_matrix_slice = Inf)} to allow this indexing."
+            ),
+            call = parent.frame()
+        )
+    }
     adj_from_matrix(
         x = as.matrix(x)[i, i],
         duplicates = attr(x, "duplicates"),

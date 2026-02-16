@@ -1,6 +1,8 @@
-# adj 0.0.2
+# adj 0.1.0
 
-* Resolves missing return value for the indexing function.
+* Changes internal type structure to resolve vctrs/base inconsistencies
+* Handle NAs in indexing
+* Fall back to matrix indexing when duplicate indices are present
 
 # adj 0.0.1
 

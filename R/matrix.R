@@ -31,7 +31,9 @@ adj_from_matrix <- function(
 
     out = vector("list", n)
     for (i in seq_len(n)) {
-        out[[i]] = rep.int(seq_len(n), times = x[i, ])
+        nrep = x[i, ]
+        nrep[is.na(nrep)] = 0L
+        out[[i]] = rep.int(seq_len(n), times = nrep)
     }
 
     out = new_adj(
