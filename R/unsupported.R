@@ -22,24 +22,24 @@ rep.adj <- function(x, ...) {
 }
 #' @export
 `dim<-.adj` <- function(x, value) {
-    cli::cli_abort("Adjacency lists do not have dimensions.")
+    cli::cli_abort("Adjacency lists do not have dimensions.") # nocov
 }
 #' @export
 `levels<-.adj` <- function(x, value) {
-    cli::cli_abort("Adjacency lists do not have dimensions.")
+    cli::cli_abort("Adjacency lists do not have dimensions.") # nocov
 }
 
 
 #' @export
 vec_proxy_compare.adj <- function(x, ...) {
-    cli::cli_abort("Comparisons are not supported for adjacency lists.")
+    cli::cli_abort("Comparisons are not supported for adjacency lists.") # nocov
 }
 #' @export
 vec_proxy_order.adj <- function(x, ...) {
-    cli::cli_abort("Comparisons are not supported for adjacency lists.")
+    cli::cli_abort("Comparisons are not supported for adjacency lists.") # nocov
 }
 
 #' @export
 sort.adj <- function(x, decreasing = FALSE, ...) {
-    cli::cli_abort("Sorting is not supported for adjacency lists.")
+    cli::cli_abort("Sorting is not supported for adjacency lists.") # nocov
 }

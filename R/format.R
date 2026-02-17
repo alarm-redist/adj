@@ -41,12 +41,14 @@ str.adj <- function(object, ...) {
     obj_str(object)
 }
 
+# nocov start
 #' @exportS3Method pillar::pillar_shaft
 pillar_shaft.adj <- function(x, ...) {
     rlang::check_installed("pillar")
     out = pillar::style_subtle(paste0("[", lengths(x), "]"))
     pillar::new_pillar_shaft_simple(out, align = "right")
 }
+# nocov end
 
 adj_preview <- function(x, n_max = 3) {
     n <- length(x)

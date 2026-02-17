@@ -40,6 +40,7 @@ NULL
 
 # slow reindexing but correct with duplicate indices
 slice_adj <- function(x, i) {
+    # nocov start
     if (length(x) >= getOption("adj.max_matrix_slice", 500L)) {
         cli::cli_abort(
             c(
@@ -49,7 +50,7 @@ slice_adj <- function(x, i) {
             ),
             call = parent.frame()
         )
-    }
+    } # nocov end
     adj_from_matrix(
         x = as.matrix(x)[i, i],
         duplicates = attr(x, "duplicates"),
