@@ -22,6 +22,7 @@ test_that("adj_from_matrix works", {
 })
 
 test_that("sparse and dense matrix methods agree", {
+    skip_if_not_installed("Matrix")
     a = adj(2, 3, 1)
     expect_equal(as.matrix(as_sparse_matrix(a)), as.matrix(a))
 
