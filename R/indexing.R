@@ -41,7 +41,8 @@ NULL
 # slow reindexing but correct with duplicate indices
 slice_adj <- function(x, i) {
     # nocov start
-    if (length(x) >= getOption("adj.max_matrix_slice", 500L)) {
+    default_max = if (assume_duplicates(x)) 500L else 5e3L
+    if (length(x) >= getOption("adj.max_matrix_slice", default_max)) {
         cli::cli_abort(
             c(
                 "{.arg x} is too large to automatically slice with duplicate indices",
@@ -56,6 +57,16 @@ slice_adj <- function(x, i) {
         duplicates = attr(x, "duplicates"),
         self_loops = attr(x, "self_loops")
     )
+}
+
+assume_duplicates <- function(x) {
+    if (attr(x, "duplicates") == "error") {
+        FALSE
+    } else if (length(x) <= 20) {
+        TRUE
+    } else {
+        any(vapply(seq_along(x), function(i) vec_duplicate_any(x[[i]]), FALSE))
+    }
 }
 
 #' @export

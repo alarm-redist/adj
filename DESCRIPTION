@@ -18,7 +18,9 @@ Imports:
     cli,
     vctrs (>= 0.6.5)
 Suggests:
+    methods,
     geos,
+    Matrix,
     pillar,
     spelling,
     testthat (>= 3.0.0)

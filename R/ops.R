@@ -145,3 +145,57 @@ adj_color <- function(x, groups = NULL, colors = 0, method = c("dsatur", "greedy
 
     color[groups]
 }
+
+#' Compute the Laplacian matrix of an adjacency list
+#'
+#' The Laplacian matrix of a graph is defined as `L = D - A`, where `D` is the
+#' degree matrix (a diagonal matrix where `D[i, i]` is the degree of node `i`)
+#' and `A` is the adjacency matrix.
+#'
+#' @param x An `adj` list
+#' @param sparse Whether to return a sparse matrix (of class `dgCMatrix`)
+#'   or a dense matrix. Requires the `Matrix` package for sparse output.
+#'
+#' @returns A matrix representing the Laplacian of the graph.
+#'
+#' @examples
+#' a <- adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
+#' L <- adj_laplacian(a, sparse = FALSE)
+#' L
+#'
+#' # count spanning trees (any minor of the Laplacian)
+#' det(L[-1, -1])
+#' @export
+adj_laplacian <- function(x, sparse = TRUE) {
+    if (isTRUE(sparse)) {
+        rlang::check_installed("Matrix")
+        Matrix::sparseMatrix(i = seq_along(x), j = seq_along(x), x = lengths(x)) -
+            as.matrix(x, sparse = TRUE)
+    } else {
+        n = length(x)
+        diag(lengths(x), n, n) - as.matrix(x)
+    }
+}
+
+#' Transpose an adjacency list
+#'
+#' Reverse the direction of edges in an adjacency list. For undirected graphs,
+#' this is a no-op.
+#'
+#' @param x An `adj` list
+#'
+#' @returns An `adj` list with edges reversed.
+#'
+#' @examples
+#' a <- adj(2, 3, 1)
+#' all(t(a) == adj(3, 1, 2))
+#' @export
+t.adj <- function(x) {
+    out = vector("list", length(x))
+    for (i in seq_along(x)) {
+        for (j in x[[i]]) {
+            out[[j]] = c(out[[j]], i)
+        }
+    }
+    reconstruct_adj(out, x)
+}

@@ -54,6 +54,11 @@ adj_to_list <- function(x, ids = NULL) {
 }
 
 #' @export
+as.list.adj <- function(x, ...) {
+    unclass(x)
+}
+
+#' @export
 as.data.frame.adj <- function(
     x,
     row.names = NULL,

@@ -7,7 +7,7 @@ reference:
 - title: Build an adjacency list
 - contents:
   - adj
-  - adj_from_matrix
+  - adj_matrix
   - adj_from_shp
 - title: Adjacency list operations
 - contents:
@@ -16,6 +16,8 @@ reference:
   - adj_color
   - adj_edges
   - adj_zero_index
+  - t.adj
+  - adj_laplacian
 - title: Other
 - contents:
   - format.adj
