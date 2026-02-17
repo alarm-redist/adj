@@ -70,11 +70,11 @@ adj_from_sparse_matrix <- function(
 
 
     if (!inherits(x, "RsparseMatrix")) {
-        x = as(x, "RsparseMatrix")
+        x = methods::as(x, "RsparseMatrix")
     }
     out = vector("list", n)
     pdiff = diff(x@p)
-    if (.hasSlot(x, "x")) {
+    if (methods::.hasSlot(x, "x")) {
         for (i in seq_len(n)) {
             idx = x@p[i] + seq_len(pdiff[i])
             out[[i]] = rep.int(x@j[idx], times = x@x[idx])

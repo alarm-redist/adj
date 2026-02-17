@@ -18,6 +18,7 @@ Imports:
     cli,
     vctrs (>= 0.6.5)
 Suggests:
+    methods,
     geos,
     Matrix,
     pillar,
