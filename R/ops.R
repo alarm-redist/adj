@@ -161,7 +161,7 @@ adj_color <- function(x, groups = NULL, colors = 0, method = c("dsatur", "greedy
 #' @examples
 #' a <- adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
 #' L <- adj_laplacian(a, sparse = FALSE)
-#' print(L)
+#' L
 #'
 #' # count spanning trees (any minor of the Laplacian)
 #' det(L[-1, -1])
