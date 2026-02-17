@@ -8,8 +8,8 @@
   [`adj_to_list()`](https://alarm-redist.org/adj/reference/adj.md) :
   Create an adjacency list
 
-- [`adj_from_matrix()`](https://alarm-redist.org/adj/reference/adj_from_matrix.md)
-  [`as.matrix(`*`<adj>`*`)`](https://alarm-redist.org/adj/reference/adj_from_matrix.md)
+- [`adj_from_matrix()`](https://alarm-redist.org/adj/reference/adj_matrix.md)
+  [`as.matrix(`*`<adj>`*`)`](https://alarm-redist.org/adj/reference/adj_matrix.md)
   : Convert adjacency lists to and from adjacency matrices
 
 - [`adj_from_shp()`](https://alarm-redist.org/adj/reference/adj_from_shp.md)
@@ -32,6 +32,10 @@
   : Add and subtract edges from an adjacency list
 - [`adj_zero_index()`](https://alarm-redist.org/adj/reference/adj_zero_index.md)
   : Convert adjacency list to use zero-based indices
+- [`t(`*`<adj>`*`)`](https://alarm-redist.org/adj/reference/t.adj.md) :
+  Transpose an adjacency list
+- [`adj_laplacian()`](https://alarm-redist.org/adj/reference/adj_laplacian.md)
+  : Compute the Laplacian matrix of an adjacency list
 
 ## Other
 

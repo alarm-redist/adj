@@ -10,15 +10,17 @@
 <url><loc>https://alarm-redist.org/adj/reference/adj.html</loc></url>
 <url><loc>https://alarm-redist.org/adj/reference/adj_color.html</loc></url>
 <url><loc>https://alarm-redist.org/adj/reference/adj_edges.html</loc></url>
-<url><loc>https://alarm-redist.org/adj/reference/adj_from_matrix.html</loc></url>
 <url><loc>https://alarm-redist.org/adj/reference/adj_from_shp.html</loc></url>
 <url><loc>https://alarm-redist.org/adj/reference/adj_indexing.html</loc></url>
+<url><loc>https://alarm-redist.org/adj/reference/adj_laplacian.html</loc></url>
+<url><loc>https://alarm-redist.org/adj/reference/adj_matrix.html</loc></url>
 <url><loc>https://alarm-redist.org/adj/reference/adj_quotient.html</loc></url>
 <url><loc>https://alarm-redist.org/adj/reference/adj_zero_index.html</loc></url>
 <url><loc>https://alarm-redist.org/adj/reference/format.adj.html</loc></url>
 <url><loc>https://alarm-redist.org/adj/reference/index.html</loc></url>
 <url><loc>https://alarm-redist.org/adj/reference/konigsberg.html</loc></url>
 <url><loc>https://alarm-redist.org/adj/reference/plot.adj.html</loc></url>
+<url><loc>https://alarm-redist.org/adj/reference/t.adj.html</loc></url>
 <url><loc>https://alarm-redist.org/adj/reference/vec_cast.adj.html</loc></url>
 </urlset>
 
