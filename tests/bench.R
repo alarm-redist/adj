@@ -1,8 +1,12 @@
 # fmt: skip file
 if (FALSE) { # to make covr happy
 
-a = adj(readRDS("data-raw/adj_wa.rds"))
+a = adj(readRDS("data-raw/adj_wa.rds"), duplicates = "error")
 a0 = adj_zero_index(a)
+
+bench::mark(as_sparse_matrix(a))
+x = as_sparse_matrix(a)
+bench::mark(adj_from_matrix(x))
 
 bench::mark(
     adj = adj_zero_index(a),
@@ -76,4 +80,4 @@ bench::mark(
     check = FALSE
 )
 
-}
+} ####################

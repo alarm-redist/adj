@@ -8,6 +8,8 @@
 #' @param ... Ignored.
 #'
 #' @returns `adj_from_matrix()` returns an `adj` list; `as.matrix()` returns a matrix.
+#'   If `Matrix` is installed, `as_sparse_matrix()` returns a sparse matrix, which
+#'   is usually preferable for computation.
 #'
 #' @examples
 #' adj_from_matrix(1 - diag(3))
@@ -15,12 +17,19 @@
 #' a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
 #' mat = as.matrix(a)
 #' all(a == adj_from_matrix(mat, duplicates = "allow")) # TRUE
+#' @name adj_matrix
+NULL
+
+#' @rdname adj_matrix
 #' @export
 adj_from_matrix <- function(
     x,
     duplicates = c("warn", "error", "allow", "remove"),
     self_loops = c("warn", "error", "allow", "remove")
 ) {
+    if (inherits(x, "sparseMatrix")) {
+        return(adj_from_sparse_matrix(x, duplicates, self_loops))
+    }
     if (!is.matrix(x)) {
         cli::cli_abort("{.arg x} must be a matrix.") # nocov
     }
@@ -32,8 +41,8 @@ adj_from_matrix <- function(
     out = vector("list", n)
     for (i in seq_len(n)) {
         nrep = x[i, ]
-        nrep[is.na(nrep)] = 0L
-        out[[i]] = rep.int(seq_len(n), times = nrep)
+        pos = which(nrep > 0L)
+        out[[i]] = rep.int(pos, times = nrep[pos])
     }
 
     out = new_adj(
@@ -45,12 +54,53 @@ adj_from_matrix <- function(
     out
 }
 
-#' @rdname adj_from_matrix
+adj_from_sparse_matrix <- function(
+    x,
+    duplicates = c("warn", "error", "allow", "remove"),
+    self_loops = c("warn", "error", "allow", "remove")
+) {
+    rlang::check_installed("Matrix", "for sparse matrix conversion")
+    if (inherits(x, "TsparseMatrix")) {
+        cli::cli_abort("{.cls TsparseMatrix} objects are not supported.") # nocov
+    }
+    n = nrow(x)
+    if (n != ncol(x)) {
+        cli::cli_abort("{.arg x} must be a square matrix.") # nocov
+    }
+
+
+    if (!inherits(x, "RsparseMatrix")) {
+        x = as(x, "RsparseMatrix")
+    }
+    out = vector("list", n)
+    pdiff = diff(x@p)
+    if (.hasSlot(x, "x")) {
+        for (i in seq_len(n)) {
+            idx = x@p[i] + seq_len(pdiff[i])
+            out[[i]] = rep.int(x@j[idx], times = x@x[idx])
+        }
+    } else {
+        for (i in seq_len(n)) {
+            out[[i]] = x@j[x@p[i] + seq_len(pdiff[i])]
+        }
+    }
+
+    out = new_adj(
+        .Call(shift_index_c, out, 1L),
+        duplicates = rlang::arg_match(duplicates),
+        self_loops = rlang::arg_match(self_loops)
+    )
+    validate_adj(out)
+    out
+}
+
+
+#' @rdname adj_matrix
 #' @export
 as.matrix.adj <- function(x, ...) {
     n = length(x)
     out = matrix(0L, nrow = n, ncol = n)
-    if (attr(x, "duplicates") != "error") {
+    if (assume_duplicates(x)) {
         for (i in seq_len(n)) {
             out[i, ] = tabulate(x[[i]], nbins = n)
         }
@@ -60,4 +110,42 @@ as.matrix.adj <- function(x, ...) {
         }
     }
     out
+}
+
+#' @rdname adj_matrix
+as_sparse_matrix <- function(x) {
+    rlang::check_installed("Matrix", "for sparse matrix conversion")
+    n = length(x)
+    n_elem = sum(lengths(x))
+    p = integer(n + 1)
+    j = integer(0)
+    # i = integer(0)
+    out = integer(0)
+    if (assume_duplicates(x)) {
+        for (k in seq_len(n)) {
+            entries = tabulate(x[[k]], nbins = n)
+            pres = which(entries > 0L)
+            p[k + 1] = length(pres)
+            j = c(j, pres)
+            out = c(out, entries[pres])
+        }
+
+        Matrix::sparseMatrix(
+            j = j,
+            p = cumsum(p),
+            x = out,
+            dims = c(n, n),
+            repr = "C",
+            check = FALSE
+        )
+    } else {
+        Matrix::sparseMatrix(
+            j = unlist(x),
+            p = c(0L, cumsum(lengths(x))),
+            dims = c(n, n),
+            index1 = TRUE,
+            repr = "C",
+            check = FALSE
+        )
+    }
 }

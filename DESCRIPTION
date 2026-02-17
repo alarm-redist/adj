@@ -19,6 +19,7 @@ Imports:
     vctrs (>= 0.6.5)
 Suggests:
     geos,
+    Matrix,
     pillar,
     spelling,
     testthat (>= 3.0.0)
