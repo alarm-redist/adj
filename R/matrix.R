@@ -4,12 +4,12 @@
 #' loss.
 #'
 #' @param x An adjacency list or matrix
+#' @param sparse If `TRUE`, return a sparse matrix, which is often preferable
+#'   for computation. See [Matrix::sparseMatrix] for details on this class.
 #' @inheritParams adj
 #' @param ... Ignored.
 #'
 #' @returns `adj_from_matrix()` returns an `adj` list; `as.matrix()` returns a matrix.
-#'   If `Matrix` is installed, `as_sparse_matrix()` returns a sparse matrix, which
-#'   is usually preferable for computation.
 #'
 #' @examples
 #' adj_from_matrix(1 - diag(3))
@@ -97,7 +97,10 @@ adj_from_sparse_matrix <- function(
 
 #' @rdname adj_matrix
 #' @export
-as.matrix.adj <- function(x, ...) {
+as.matrix.adj <- function(x, sparse = FALSE, ...) {
+    if (isTRUE(sparse)) {
+        return(as_sparse_matrix(x))
+    }
     n = length(x)
     out = matrix(0L, nrow = n, ncol = n)
     if (assume_duplicates(x)) {
@@ -112,15 +115,12 @@ as.matrix.adj <- function(x, ...) {
     out
 }
 
-#' @rdname adj_matrix
-#' @export
 as_sparse_matrix <- function(x) {
     rlang::check_installed("Matrix", "for sparse matrix conversion")
     n = length(x)
     n_elem = sum(lengths(x))
     p = integer(n + 1)
     j = integer(0)
-    # i = integer(0)
     out = integer(0)
     if (assume_duplicates(x)) {
         for (k in seq_len(n)) {

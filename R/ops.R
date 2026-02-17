@@ -170,7 +170,7 @@ adj_laplacian <- function(x, sparse = TRUE) {
     if (isTRUE(sparse)) {
         rlang::check_installed("Matrix")
         Matrix::sparseMatrix(i = seq_along(x), j = seq_along(x), x = lengths(x)) -
-            as_sparse_matrix(x)
+            as.matrix(x, sparse = TRUE)
     } else {
         n = length(x)
         diag(lengths(x), n, n) - as.matrix(x)

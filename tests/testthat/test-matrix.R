@@ -24,25 +24,25 @@ test_that("adj_from_matrix works", {
 test_that("sparse and dense matrix methods agree", {
     skip_if_not_installed("Matrix")
     a = adj(2, 3, 1)
-    expect_equal(as.matrix(as_sparse_matrix(a)), as.matrix(a))
+    expect_equal(as.matrix(as.matrix(a, sparse=TRUE)), as.matrix(a))
 
     a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
-    expect_equal(as.matrix(as_sparse_matrix(a)), as.matrix(a))
+    expect_equal(as.matrix(as.matrix(a, sparse=TRUE)), as.matrix(a))
 
     a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "remove")
-    expect_equal(1L * as.matrix(as_sparse_matrix(a)), as.matrix(a))
+    expect_equal(1L * as.matrix(as.matrix(a, sparse=TRUE)), as.matrix(a))
 })
 
 test_that("sparse matrix round trip works", {
     skip_if_not_installed("Matrix")
     a = adj(2, 3, 1)
-    x = as_sparse_matrix(a)
+    x = as.matrix(a, sparse=TRUE)
     x2 = as(x, "RsparseMatrix")
     expect_equal(adj_from_matrix(x), a)
     expect_equal(adj_from_matrix(x2), a)
 
     a = adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
-    x = as_sparse_matrix(a)
+    x = as.matrix(a, sparse=TRUE)
     x2 = as(x, "RsparseMatrix")
     expect_equal(adj_from_matrix(x, duplicates = "allow"), a)
     expect_equal(adj_from_matrix(x2, duplicates = "allow"), a)

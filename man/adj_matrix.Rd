@@ -4,7 +4,6 @@
 \alias{adj_matrix}
 \alias{adj_from_matrix}
 \alias{as.matrix.adj}
-\alias{as_sparse_matrix}
 \title{Convert adjacency lists to and from adjacency matrices}
 \usage{
 adj_from_matrix(
@@ -13,9 +12,7 @@ adj_from_matrix(
   self_loops = c("warn", "error", "allow", "remove")
 )
 
-\method{as.matrix}{adj}(x, ...)
-
-as_sparse_matrix(x)
+\method{as.matrix}{adj}(x, sparse = FALSE, ...)
 }
 \arguments{
 \item{x}{An adjacency list or matrix}
@@ -30,12 +27,13 @@ to themselves). The value \code{"warn"} warns the user; \code{"error"} throws an
 error; \code{"allow"} allows self-loops, and \code{"remove"} removes self-loops
 silently and then sets the corresponding attribute to \code{"error"}.}
 
+\item{sparse}{If \code{TRUE}, return a sparse matrix, which is often preferable
+for computation. See \link[Matrix:sparseMatrix]{Matrix::sparseMatrix} for details on this class.}
+
 \item{...}{Ignored.}
 }
 \value{
 \code{adj_from_matrix()} returns an \code{adj} list; \code{as.matrix()} returns a matrix.
-If \code{Matrix} is installed, \code{as_sparse_matrix()} returns a sparse matrix, which
-is usually preferable for computation.
 }
 \description{
 Adjacency lists can be converted to adjacency matrices and vice versa without
