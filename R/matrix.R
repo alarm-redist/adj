@@ -113,6 +113,7 @@ as.matrix.adj <- function(x, ...) {
 }
 
 #' @rdname adj_matrix
+#' @export
 as_sparse_matrix <- function(x) {
     rlang::check_installed("Matrix", "for sparse matrix conversion")
     n = length(x)
