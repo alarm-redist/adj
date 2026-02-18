@@ -1,7 +1,7 @@
 # Find a coloring of an adjacency list
 
 Greedily finds a coloring of an adjacency list, optionally grouped by a
-provied vector.
+provided vector.
 
 ## Usage
 

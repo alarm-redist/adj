@@ -67,7 +67,7 @@ a <- adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
 adj_quotient(a, c("AD", "B", "C", "AD"))
 #> <adj[3]>
 #> [1] {2, 3} {1}    {1}   
-adj_quotient_int(a, c(1L, 2L, 3L, 1L), n_group = 3L, self_loops = "allow")
+adj_quotient_int(a, c(1L, 2L, 3L, 1L), n_groups = 3L, self_loops = "allow")
 #> <adj[3]>
 #> [1] {2, 3, 1} {1}       {1}      
 ```
