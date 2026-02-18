@@ -18,7 +18,7 @@
 #' a <- adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
 #' # merge two islands (A and D)
 #' adj_quotient(a, c("AD", "B", "C", "AD"))
-#' adj_quotient_int(a, c(1L, 2L, 3L, 1L), n_group = 3L, self_loops = "allow")
+#' adj_quotient_int(a, c(1L, 2L, 3L, 1L), n_groups = 3L, self_loops = "allow")
 #' @export
 adj_quotient <- function(
     x,
@@ -66,7 +66,7 @@ adj_quotient_int <- function(
 #' Find a coloring of an adjacency list
 #'
 #' Greedily finds a coloring of an adjacency list, optionally grouped by a
-#' provied vector.
+#' provided vector.
 #'
 #' @param x An `adj` list
 #' @param groups An optional vector specifying the group membership for each node

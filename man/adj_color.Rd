@@ -25,7 +25,7 @@ An integer vector
 }
 \description{
 Greedily finds a coloring of an adjacency list, optionally grouped by a
-provied vector.
+provided vector.
 }
 \examples{
 a <- adj(konigsberg$bridge_to, ids = konigsberg$area, duplicates = "allow")
